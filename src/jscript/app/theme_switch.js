@@ -22,7 +22,7 @@ function handleClick(e) {
   }
 
   isChecked = true;
-  if (!bodyClassList.value) bodyClassList.remove(Theme.DARK);
+  if (bodyClassList.value) bodyClassList.remove(Theme.DARK);
   localStorage.setItem('CurrentTheme', Theme.LIGHT);
   return bodyClassList.add(Theme.LIGHT);
 }
