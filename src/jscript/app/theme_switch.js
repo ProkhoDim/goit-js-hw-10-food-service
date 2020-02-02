@@ -1,11 +1,3 @@
-import markupTemplate from '../templates/js-menu.hbs';
-import itemsArray from '../../menu.json';
-
-const jsMenu = document.querySelector('.js-menu');
-const markup = itemsArray.map(item => markupTemplate(item)).join('');
-
-jsMenu.insertAdjacentHTML('beforeend', markup);
-
 const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
@@ -13,7 +5,9 @@ const Theme = {
 const bodyClassList = document.body.classList;
 const jsInputCheckbox = document.querySelector('.js-switch-input');
 
-bodyClassList.add(localStorage.getItem('CurrentTheme'));
+if (localStorage.getItem('CurrentTheme')) {
+  bodyClassList.add(localStorage.getItem('CurrentTheme'));
+}
 
 if (bodyClassList.value === Theme.DARK) jsInputCheckbox.checked = true;
 
@@ -28,7 +22,7 @@ function handleClick(e) {
   }
 
   isChecked = true;
-  bodyClassList.remove(Theme.DARK);
+  if (!bodyClassList.value) bodyClassList.remove(Theme.DARK);
   localStorage.setItem('CurrentTheme', Theme.LIGHT);
   return bodyClassList.add(Theme.LIGHT);
 }
